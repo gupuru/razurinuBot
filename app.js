@@ -24,5 +24,12 @@ server.post('/api/messages', connector.listen());
 //=========================================================
 
 bot.dialog('/', function (session) {
-    session.send("aaaはろーわーるどーーー(´・ω・｀)");
+    session.beginDialog('/profile');
 });
+
+bot.dialog('/profile', [
+    function(session) {
+        session.send('profileだぴょん');
+        session.endDialog();
+    }
+]);
