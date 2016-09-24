@@ -23,12 +23,17 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
-var intents = new builder.IntentDialog();
-bot.dialog('/', intents);
-
-intents
+bot.dialog('/', new builder.IntentDialog()
     .matches(/^echo/i, '/echo')
-    .matches(/^hello/i, '/hello');
+    .matches(/^hello/i, '/hello')
+);
+
+// var intents = new builder.IntentDialog();
+// bot.dialog('/', intents);
+
+// intents
+//     .matches(/^echo/i, '/echo')
+//     .matches(/^hello/i, '/hello');
 
 bot.dialog('/echo', [
     function (session) {
