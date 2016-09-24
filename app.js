@@ -28,11 +28,7 @@ bot.dialog('/', intents);
 
 intents
     .matches(/^echo/i, '/echo')
-    .onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
-
-// bot.dialog('/', function (session) {
-//     session.beginDialog('/profile');
-// });
+    .matches(/^hello/i, '/hello');
 
 bot.dialog('/echo', [
     function (session) {
@@ -40,5 +36,11 @@ bot.dialog('/echo', [
     },
     function (session, results) {
         session.send("ええと... %s", results.response);
+    }
+]);
+
+bot.dialog('/hello', [
+    function (session) {
+        session.send('こんちわ')
     }
 ]);
