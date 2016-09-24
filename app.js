@@ -41,6 +41,7 @@ bot.dialog('/echo', [
     },
     function (session, results) {
         session.send("ええと... %s", results.response);
+        session.endDialog();
     }
 ]);
 
