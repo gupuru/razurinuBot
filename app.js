@@ -23,6 +23,6 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
-bot.dialog('/hello', function (session) {
-    session.send("はろーわーるどーーー(´・ω・｀)");
+bot.dialog('/', function (session) {
+    session.send("aaaはろーわーるどーーー(´・ω・｀)");
 });
