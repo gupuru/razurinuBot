@@ -26,22 +26,19 @@ server.post('/api/messages', connector.listen());
 var intents = new builder.IntentDialog();
 bot.dialog('/', intents);
 
-intents.matches(/^echo/i, [
-    function (session) {
-        builder.Prompts.text(session, "What would you like me to say?");
-    },
-    function (session, results) {
-        session.send("Ok... %s", results.response);
-    }
-]);
+intents
+    .matches(/^echo/i, '/echo')
+    .onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
 // bot.dialog('/', function (session) {
 //     session.beginDialog('/profile');
 // });
 
-// bot.dialog('/profile', [
-//     function(session) {
-//         session.send('profileだぴょん');
-//         session.endDialog();
-//     }
-// ]);
+bot.dialog('/echo', [
+    function (session) {
+        builder.Prompts.text(session, "なにか言えよ?");
+    },
+    function (session, results) {
+        session.send("ええと... %s", results.response);
+    }
+]);
