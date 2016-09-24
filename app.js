@@ -23,13 +23,25 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
-bot.dialog('/', function (session) {
-    session.beginDialog('/profile');
-});
+var intents = new builder.IntentDialog();
+bot.dialog('/', intents);
 
-bot.dialog('/profile', [
-    function(session) {
-        session.send('profileだぴょん');
-        session.endDialog();
+intents.matches(/^echo/i, [
+    function (session) {
+        builder.Prompts.text(session, "What would you like me to say?");
+    },
+    function (session, results) {
+        session.send("Ok... %s", results.response);
     }
 ]);
+
+// bot.dialog('/', function (session) {
+//     session.beginDialog('/profile');
+// });
+
+// bot.dialog('/profile', [
+//     function(session) {
+//         session.send('profileだぴょん');
+//         session.endDialog();
+//     }
+// ]);
