@@ -23,30 +23,29 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
+bot.on('conversationUpdate', function (message) {
+    if (message.membersAdded) {
+        var membersAdded = message.membersAdded
+            .map((m) => {
+                var isSelf = m.id === message.address.bot.id;
+                return (isSelf ? message.address.bot.name : m.name);
+            })
+            .join(', ');
+
+        var reply = new builder.Message()
+            .address(message.address)
+            .text('ようこそ ' + membersAdded);
+        bot.send(reply);
+    }
+});
+
 bot.dialog('/', new builder.IntentDialog()
-    .matches(/^echo/i, '/echo')
     .matches(/^hello/i, '/hello')
 );
 
-// var intents = new builder.IntentDialog();
-// bot.dialog('/', intents);
-
-// intents
-//     .matches(/^echo/i, '/echo')
-//     .matches(/^hello/i, '/hello');
-
-bot.dialog('/echo', [
-    function (session) {
-        builder.Prompts.text(session, "なにか言えよ?");
-    },
-    function (session, results) {
-        session.send("ええと... %s", results.response);
-        session.endDialog();
-    }
-]);
-
 bot.dialog('/hello', [
     function (session) {
-        session.send('こんちわ')
+        session.send('きつねーーーー:kitune2: ');
+        session.endDialog();
     }
 ]);
