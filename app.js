@@ -39,7 +39,7 @@ bot.dialog('/', new builder.IntentDialog()
 
 bot.dialog('/hello', [
     function (session) {
-        session.send('きつねーーーー:kitune2: ');
+        session.send('こちわっす');
         session.endDialog();
     }
 ]);
